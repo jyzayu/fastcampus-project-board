@@ -5,7 +5,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @ToString(callSuper = true)
 @Getter
 @Entity
@@ -32,8 +35,12 @@ public class Article extends AuditingFields{
     @Column(nullable = false, length = 10000)
     private String content;
 
-    public Article() {
+    @ToString.Exclude
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
+    public Article() {
     }
 
     private Article(Long id, String title, String content) {
@@ -58,4 +65,5 @@ public class Article extends AuditingFields{
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
