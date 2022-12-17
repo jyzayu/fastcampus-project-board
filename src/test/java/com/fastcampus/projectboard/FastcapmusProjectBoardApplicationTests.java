@@ -8,6 +8,7 @@ class FastcapmusProjectBoardApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }

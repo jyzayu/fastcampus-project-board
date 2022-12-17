@@ -1,5 +1,6 @@
 package com.fastcampus.projectboard.domain;
 
+import com.fastcampus.projectboard.dto.UserAccountDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import java.util.Objects;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
-@ToString
+@ToString(callSuper = true)
 @Entity
 @Getter
 public class UserAccount extends AuditingFields{
@@ -37,7 +38,7 @@ public class UserAccount extends AuditingFields{
     protected UserAccount() {
     }
 
-    private UserAccount(String userId, String userPassword, String email, String nickname, String memo) {
+    private UserAccount(String userId, String userPassword, String email, String nickname,String memo) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.email = email;
@@ -48,6 +49,8 @@ public class UserAccount extends AuditingFields{
     public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
         return new UserAccount(userId, userPassword, email, nickname, memo);
     }
+
+
 
     @Override
     public boolean equals(Object o) {

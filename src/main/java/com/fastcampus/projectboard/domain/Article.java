@@ -43,14 +43,14 @@ public class Article extends AuditingFields{
     public Article() {
     }
 
-    private Article(Long id, String title, String content) {
-        this.id = id;
+    private Article(UserAccount userAccount, String title, String content) {
+        this.userAccount = userAccount;
         this.title = title;
         this.content = content;
     }
 
-    public static Article of(Long id, String title, String content) {
-        return new Article(id, title, content);
+    public static Article of(UserAccount userAccount, String title, String content) {
+        return new Article(userAccount, title, content);
     }
 
     @Override
