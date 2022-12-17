@@ -9,61 +9,26 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class UserAccountDto {
+public record UserAccountDto (
+    String userId,
+    String userPassword,
+    String email,
+    String nickname,
+    String memo,
+    LocalDateTime createdAt,
+    String createdBy,
+    LocalDateTime modifiedAt,
+    String modifiedBy
+){
 
-    @Id
-    @Column(length = 50)
-    private String userId;
-
-    @Setter
-    private String userPassword;
-
-    @Setter
-    @Column(length = 100)
-    private String email;
-    @Setter
-    @Column(length = 100)
-    private String nickname;
-
-    @Setter
-    private String memo;
-
-    private LocalDateTime createdAt;
-
-    private String createdBy;
-
-    private LocalDateTime modifiedAt;
-
-    private String modifiedBy;
-
-    protected UserAccountDto of() {
+    public UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo) {
+        return new UserAccountDto(userId,userPassword,email,nickname, memo, null, null, null, null);
     }
+    
 
 
-
-    private UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo) {
-        this.userId = userId;
-        this.userPassword = userPassword;
-        this.email = email;
-        this.nickname = nickname;
-        this.memo = memo;
-        this.createdAt = null;
-        createdBy = null;
-
-    }
-
-
-
-    private UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo) {
-        this.userId = userId;
-        this.userPassword = userPassword;
-        this.email = email;
-        this.nickname = nickname;
-        this.memo = memo;
-    }
-
-    public static com.fastcampus.projectboard.domain.UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
-        return new com.fastcampus.projectboard.domain.UserAccount(userId, userPassword, email, nickname, memo);
+    public static UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
+        return new UserAccountDto(userId, userPassword, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
     public static UserAccountDto from(UserAccount entity){
@@ -72,7 +37,11 @@ public class UserAccountDto {
                 entity.getUserPassword(),
                 entity.getEmail(),
                 entity.getNickname(),
-                entity.getMemo()
+                entity.getMemo(),
+                entity.getCreatedAt(),
+                entity.getCreatedBy(),
+                entity.getModifiedAt(),
+                entity.getModifiedBy()
         );
     }
 
@@ -86,17 +55,4 @@ public class UserAccountDto {
         );
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        com.fastcampus.projectboard.domain.UserAccount that = (com.fastcampus.projectboard.domain.UserAccount) o;
-        return Objects.equals(userId, that.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId);
-    }
 }
