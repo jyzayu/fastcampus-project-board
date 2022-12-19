@@ -19,35 +19,35 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class HashTag extends AuditingFields {
+public class Hashtag extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "hashTags")
+    @ManyToMany(mappedBy = "hashtags")
     private Set<Article> articles = new LinkedHashSet<>();
 
-    @Setter @Column(nullable = false, length = 50) private String hashTagName;
+    @Setter @Column(nullable = false, length = 50) private String hashtagName;
 
 
-    public HashTag() {
+    public Hashtag() {
     }
 
-    private HashTag(Long id, String hashTagName) {
+    private Hashtag(Long id, String hashtagName) {
         this.id = id;
-        this.hashTagName = hashTagName;
+        this.hashtagName = hashtagName;
     }
 
-    public static HashTag of(Long id, String hashTagName) {
-        return new HashTag(id, hashTagName);
+    public static Hashtag of(Long id, String hashtagName) {
+        return new Hashtag(id, hashtagName);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HashTag hashTag = (HashTag) o;
+        Hashtag hashTag = (Hashtag) o;
         return id.equals(hashTag.id);
     }
 
