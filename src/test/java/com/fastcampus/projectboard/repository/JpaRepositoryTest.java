@@ -14,8 +14,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-@DisplayName("JPA 연결 테스트")
-//@Import(JpaRepositoryTest.TestJpaConfig.class)
+@DisplayName("JPA connection Test")
+@Import(JpaConfig.class)
 @DataJpaTest
 class JpaRepositoryTest {
 
@@ -50,7 +50,7 @@ class JpaRepositoryTest {
                 .hasSize(123); // classpath:resources/data.sql 참조
     }
 
-    @DisplayName("insert 테스트")
+    @DisplayName("insert test")
     @Test
     void givenTestData_whenInserting_thenWorksFine() {
         // Given
